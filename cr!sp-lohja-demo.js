@@ -921,7 +921,7 @@ async function sceneParticelIntro(ctx, t) {
     // start the music
     audio.play();  
     
-    const introCount = t.fps * 17; // 17 seconds
+    const introCount = t.fps * 18; // 17 seconds
     const introFadein = Math.floor(introCount * 0.25); // 25% fade in
     const introrunning = Math.floor(introCount * 0.50); // 50% run
     const introFadeout = Math.floor(introCount * 0.1); // 12% fadeout
@@ -1572,6 +1572,18 @@ async function sceneParticelIntro(ctx, t) {
 
     const creditsStringArray = "Created by: Oldhandmixer|Directed by: Dipe@CR!SP|Music by: Salle@CR!SP|Special greetings to:|Jumalauta|Hedelmae|Mehu".split("|");
     const threeSecondDelay = t.fps * 3;
+    scrollerdc.font = "bold 50px Arial";
+    scrollerdc.clearRect(0,0,width,height);
+    scrollerdc.fillStyle = "rgba(0,0,0,1)";
+    scrollerdc.fillRect(0,0,width,height);
+    scrollerdc.globalCompositeOperation = "destination-out";
+    xtop = 100;
+    creditsStringArray.forEach((str, index) => {
+        const xsize = scrollerdc.measureText(str).width;
+        scrollerdc.fillStyle = "white";
+        scrollerdc.fillText(str, (width-xsize)/2 + 25, xtop + index * 80);
+    });
+    scrollerdc.globalCompositeOperation = "source-over";
 
     for(var count = 0; count < threeSecondDelay; count++) {
         let buffer = document.createElement('canvas');
@@ -1581,18 +1593,6 @@ async function sceneParticelIntro(ctx, t) {
 
         drawNoise(dc, width, height, 40);
         drawPixelate(dc, buffer, 8);
-        scrollerdc.font = scroller2.font;
-        scrollerdc.clearRect(0,0,width,height);
-        scrollerdc.fillStyle = "rgba(0,0,0,1)";
-        scrollerdc.fillRect(0,0,width,height);
-        scrollerdc.globalCompositeOperation = "destination-out";
-        let xtop = 100;
-        creditsStringArray.forEach((str, index) => {
-            const xsize = scrollerdc.measureText(str).width;
-            scrollerdc.fillStyle = "white";
-            scrollerdc.fillText(str, (width-xsize)/2 + 25, xtop + index * 130);
-        });
-        scrollerdc.globalCompositeOperation = "source-over";
         dc.drawImage(scrollermask, 0, 0);
         dc.fillStyle = "rgba(0,0,0," + (1-count/threeSecondDelay) + ")";
         dc.fillRect(0, 0, buffer.width, buffer.height);
@@ -1610,18 +1610,7 @@ async function sceneParticelIntro(ctx, t) {
 
         drawNoise(dc, width, height, 40);
         drawPixelate(dc, buffer, 8);
-        scrollerdc.font = scroller2.font;
-        scrollerdc.clearRect(0,0,width,height);
-        scrollerdc.fillStyle = "rgba(0,0,0,1)";
-        scrollerdc.fillRect(0,0,width,height);
-        scrollerdc.globalCompositeOperation = "destination-out";
-        let xtop = 100;
-        creditsStringArray.forEach((str, index) => {
-            const xsize = scrollerdc.measureText(str).width;
-            scrollerdc.fillStyle = "white";
-            scrollerdc.fillText(str, (width-xsize)/2 + 25, xtop + index * 130);
-        });
-        scrollerdc.globalCompositeOperation = "source-over";
+    
         dc.drawImage(scrollermask, 0, 0);
         t.frameBuffer.push(buffer);
         while (t.frameBuffer.length > 50) {
@@ -1637,18 +1626,6 @@ async function sceneParticelIntro(ctx, t) {
 
         drawNoise(dc, width, height, 40);
         drawPixelate(dc, buffer, 8);
-        scrollerdc.font = scroller2.font;
-        scrollerdc.clearRect(0,0,width,height);
-        scrollerdc.fillStyle = "rgba(0,0,0,1)";
-        scrollerdc.fillRect(0,0,width,height);
-        scrollerdc.globalCompositeOperation = "destination-out";
-        let xtop = 100;
-        creditsStringArray.forEach((str, index) => {
-            const xsize = scrollerdc.measureText(str).width;
-            scrollerdc.fillStyle = "white";
-            scrollerdc.fillText(str, (width-xsize)/2 + 25, xtop + index * 130);
-        });
-        scrollerdc.globalCompositeOperation = "source-over";
         dc.drawImage(scrollermask, 0, 0);
         dc.fillStyle = "rgba(0,0,0," + (count/threeSecondDelay) + ")";
         dc.fillRect(0, 0, buffer.width, buffer.height);
