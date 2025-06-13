@@ -1283,7 +1283,7 @@ async function sceneParticelIntro(ctx, t) {
         dc.fillStyle = "black";
         dc.fillRect(vpdat1.x+2 , vpdat1.y+2, vpdat1.w-4, vpdat1.h-4);
         dc.fillRect(vpstat1.x+2, vpstat1.y+2, vpstat1.w-4, vpstat1.h-4);
-        dc.fillRect(vpdecoder1.x, vpdecoder1.y-2, vpdecoder1.w-4, vpdecoder1.h );
+        dc.fillRect(vpdecoder1.x, vpdecoder1.y-2, vpdecoder1.w-4, vpdecoder1.h+2 );
         dc.fillStyle = "rgba(0,0,0," + (1-count/analyzerFadein) + ")";
         dc.fillRect(0, 0, buffer.width, buffer.height);
 
@@ -1304,7 +1304,7 @@ async function sceneParticelIntro(ctx, t) {
         dc.fillRect(vpdat1.x+2 + vpdat1.w *progress-4, vpdat1.y+2, vpdat1.w * (1-progress), vpdat1.h-4);
         dc.fillRect(vpdat1.x+2 , vpdat1.y+vpdat1.h-45, vpdat1.w-4, 43);
         dc.fillRect(vpstat1.x+2, vpstat1.y+2, vpstat1.w-4, vpstat1.h-4);
-        dc.fillRect(vpdecoder1.x, vpdecoder1.y-2, vpdecoder1.w-4, vpdecoder1.h );
+        dc.fillRect(vpdecoder1.x, vpdecoder1.y-2, vpdecoder1.w-4, vpdecoder1.h + 2 );
 
         t.frameBuffer.push(buffer);
         while (t.frameBuffer.length > 50) {
@@ -1321,7 +1321,7 @@ async function sceneParticelIntro(ctx, t) {
         const progress = count / analyzerStat1Progress;
         dc.fillRect(vpdat1.x+2 , vpdat1.y+vpdat1.h-45, vpdat1.w-4, 43);
         dc.fillRect(vpstat1.x+2 + vpstat1.w *progress-4, vpstat1.y+2, vpstat1.w * (1-progress), vpstat1.h-4);
-        dc.fillRect(vpdecoder1.x, vpdecoder1.y-2, vpdecoder1.w-4, vpdecoder1.h );
+        dc.fillRect(vpdecoder1.x, vpdecoder1.y-2, vpdecoder1.w-4, vpdecoder1.h + 2 );
 
         t.frameBuffer.push(buffer);
         while (t.frameBuffer.length > 50) {
@@ -1337,7 +1337,7 @@ async function sceneParticelIntro(ctx, t) {
         dc.drawImage(dat1buffer, 0, 0);
         const progress = count / analyzerDecoder1Progress;
         dc.fillRect(vpdat1.x+2 + vpdat1.w *progress-4, vpdat1.y+vpdat1.h-48, vpdat1.w * (1-progress), 45);
-        dc.fillRect(vpdecoder1.x, vpdecoder1.y + progress* vpdecoder1.h, vpdecoder1.w-4, vpdecoder1.h *(1-progress));
+        dc.fillRect(vpdecoder1.x, vpdecoder1.y + progress* vpdecoder1.h + 2, vpdecoder1.w-4, vpdecoder1.h *(1-progress)+2);
         
         t.frameBuffer.push(buffer);
         while (t.frameBuffer.length > 50) {
@@ -1368,7 +1368,7 @@ async function sceneParticelIntro(ctx, t) {
         dc.fillStyle = "rgba(0,0,0," + (count/analyzerFadeout) + ")";
         dc.fillRect(vpdat1.x+2 , vpdat1.y+2, vpdat1.w-4, vpdat1.h-4);
         dc.fillRect(vpstat1.x+2, vpstat1.y+2, vpstat1.w-4, vpstat1.h-4);
-        dc.fillRect(vpdecoder1.x, vpdecoder1.y-2, vpdecoder1.w-4, vpdecoder1.h );
+        dc.fillRect(vpdecoder1.x, vpdecoder1.y-2, vpdecoder1.w-4, vpdecoder1.h+2 );
 
         t.frameBuffer.push(buffer);
         while (t.frameBuffer.length > 50) {
@@ -1387,7 +1387,7 @@ async function sceneParticelIntro(ctx, t) {
         dc.fillRect(vpdat2.x+2 + vpdat2.w *progress-4, vpdat2.y+2, vpdat2.w * (1-progress), vpdat2.h-4);
         dc.fillRect(vpdat2.x+2 , vpdat2.y+vpdat2.h-45, vpdat2.w-4, 43);
         dc.fillRect(vpstat2.x+2, vpstat2.y+2, vpstat2.w-4, vpstat2.h-4);
-        dc.fillRect(vpdecoder2.x, vpdecoder2.y-2, vpdecoder2.w-4, vpdecoder2.h );
+        dc.fillRect(vpdecoder2.x, vpdecoder2.y-2, vpdecoder2.w-4, vpdecoder2.h + 2 );
 
         t.frameBuffer.push(buffer);
         while (t.frameBuffer.length > 50) {
@@ -1404,7 +1404,7 @@ async function sceneParticelIntro(ctx, t) {
         const progress = count / analyzerStat2Progress;
         dc.fillRect(vpdat2.x+2 , vpdat2.y+vpdat2.h-45, vpdat2.w-4, 43);
         dc.fillRect(vpstat2.x+2 + vpstat2.w *progress-4, vpstat2.y+2, vpstat2.w * (1-progress), vpstat2.h-4);
-        dc.fillRect(vpdecoder2.x, vpdecoder2.y-2, vpdecoder2.w-4, vpdecoder2.h );
+        dc.fillRect(vpdecoder2.x, vpdecoder2.y-2, vpdecoder2.w-4, vpdecoder2.h + 2 );
 
         t.frameBuffer.push(buffer);
         while (t.frameBuffer.length > 50) {
@@ -1420,7 +1420,7 @@ async function sceneParticelIntro(ctx, t) {
         dc.drawImage(dat2buffer, 0, 0);
         const progress = count / analyzerDecoder2Progress;
         dc.fillRect(vpdat2.x+2 + vpdat2.w *progress-4, vpdat2.y+vpdat2.h-48, vpdat2.w * (1-progress), 45);
-        dc.fillRect(vpdecoder2.x, vpdecoder2.y + progress* vpdecoder2.h, vpdecoder2.w-4, vpdecoder2.h *(1-progress));
+        dc.fillRect(vpdecoder2.x, vpdecoder2.y + progress* vpdecoder2.h + 2, vpdecoder2.w-4, vpdecoder2.h *(1-progress)+2);
         
         t.frameBuffer.push(buffer);
         while (t.frameBuffer.length > 50) {
@@ -1435,7 +1435,7 @@ async function sceneParticelIntro(ctx, t) {
         const dc = buffer.getContext('2d');
         dc.drawImage(glitchBuffer, 0, 0);
         dc.fillStyle = "rgba(0,0,0," + (count/analyzerFadeout) + ")";
-        dc.fillRect(0, 0, buffer.width, buffer.height);
+        dc.fillRect(0, 0, buffer.width, buffer.height+2);
 
         t.frameBuffer.push(buffer);
         while (t.frameBuffer.length > 50) {
