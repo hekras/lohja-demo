@@ -1571,6 +1571,7 @@ async function sceneParticelIntro(ctx, t) {
         }
     }
 
+
     const GreetingsStringArray = "Special greetings to:|Jumalauta|Hedelmae|Mehu".split("|");
     const threeSecondDelay = t.fps * 3;
     scrollerdc.font = "bold 50px Arial";
@@ -1699,8 +1700,49 @@ async function sceneParticelIntro(ctx, t) {
             await new Promise(resolve => setTimeout(resolve, 10));
         }
     }
+    
+    scrollerdc.font = "bold 90px Arial";
+    scrollerdc.clearRect(0,0,width,height);
+    scrollerdc.fillStyle = "rgba(0,0,0,1)";
+    scrollerdc.fillRect(0,0,width,height);
+    scrollerdc.globalCompositeOperation = "destination-out";
+    xtop = 100;
+    scrollerdc.textAlign = "center";
+    scrollerdc.fillText(crisptext[0], scrollermask.width / 2, scrollermask.height/2 - 68);
+    scrollerdc.fillText(crisptext[1], scrollermask.width / 2, scrollermask.height/2 + 68);
+    scrollerdc.globalCompositeOperation = "source-over";
 
+    for(var count = 0; count < threeSecondDelay; count++) {
+        let buffer = document.createElement('canvas');
+        buffer.width = width;
+        buffer.height = height;
+        const dc = buffer.getContext('2d');        
 
+        drawNoise(dc, width, height, 40);
+        drawPixelate(dc, buffer, 8);
+        dc.drawImage(scrollermask, 0, 0);
+        dc.fillStyle = "rgba(0,0,0," + (1-count/threeSecondDelay) + ")";
+        dc.fillRect(0, 0, buffer.width, buffer.height);
+        t.frameBuffer.push(buffer);
+        while (t.frameBuffer.length > 50) {
+            await new Promise(resolve => setTimeout(resolve, 10));
+        }
+    }
+
+    while(true) {
+        let buffer = document.createElement('canvas');
+        buffer.width = width;
+        buffer.height = height;
+        const dc = buffer.getContext('2d');        
+
+        drawNoise(dc, width, height, 40);
+        drawPixelate(dc, buffer, 8);
+        dc.drawImage(scrollermask, 0, 0);
+        t.frameBuffer.push(buffer);
+        while (t.frameBuffer.length > 50) {
+            await new Promise(resolve => setTimeout(resolve, 10));
+        }
+    }
 }
 
 // ======================================================
