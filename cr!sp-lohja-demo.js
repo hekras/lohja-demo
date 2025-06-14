@@ -23,7 +23,8 @@ let captureindex = 0;
 var mouse = {x:0, y:0, down:false};
 
 //const audio = new Audio('./Mixdown_14.mp3'); // Replace with your MP3 file path or URL
-const audio = new Audio('./mixdown24.mp3'); // Replace with your MP3 file path or URL
+//const audio = new Audio('./mixdown24.mp3'); // Replace with your MP3 file path or URL
+const audio = new Audio('./mixdown_26.mp3'); // Replace with your MP3 file path or URL
 
 
 // ======================================================
@@ -863,7 +864,7 @@ async function sceneParticelIntro(ctx, t) {
     vpdecoder2.render(dat2dc, vpstat1.hover3);
 
     var scroller = new Scroller(scrollText, "bold 100px Arial", ctx, width, width, height/2, height, -8, 0, "white");
-    var scroller2 = new Scroller(scrollText2, "bold 100px Arial", ctx, width, width, height/2, height, -10, 0, "white");
+    var scroller2 = new Scroller(scrollText2, "bold 100px Arial", ctx, width, width, height/2, height, -7, 0, "white");
 
 
 // wait for click on screen event to start the animation
@@ -1443,7 +1444,7 @@ async function sceneParticelIntro(ctx, t) {
         }
     }
 
-    const scroller2Count = t.fps * 40;
+    const scroller2Count = t.fps * 43;
     const scroller2Fadeout = t.fps * 3;
 
     for(var count = 0; count < scroller2Fadeout; count++) {
@@ -1570,8 +1571,72 @@ async function sceneParticelIntro(ctx, t) {
         }
     }
 
-    const creditsStringArray = "Created by: Oldhandmixer|Directed by: Dipe@CR!SP|Music by: Salle@CR!SP|Special greetings to:|Jumalauta|Hedelmae|Mehu".split("|");
+    const GreetingsStringArray = "Special greetings to:|Jumalauta|Hedelmae|Mehu".split("|");
     const threeSecondDelay = t.fps * 3;
+    scrollerdc.font = "bold 50px Arial";
+    scrollerdc.clearRect(0,0,width,height);
+    scrollerdc.fillStyle = "rgba(0,0,0,1)";
+    scrollerdc.fillRect(0,0,width,height);
+    scrollerdc.globalCompositeOperation = "destination-out";
+    xtop = 100;
+    GreetingsStringArray.forEach((str, index) => {
+        const xsize = scrollerdc.measureText(str).width;
+        scrollerdc.fillStyle = "white";
+        scrollerdc.fillText(str, (width-xsize)/2 + 25, xtop + index * 80);
+    });
+    scrollerdc.globalCompositeOperation = "source-over";
+
+    for(var count = 0; count < threeSecondDelay; count++) {
+        let buffer = document.createElement('canvas');
+        buffer.width = width;
+        buffer.height = height;
+        const dc = buffer.getContext('2d');        
+
+        drawNoise(dc, width, height, 40);
+        drawPixelate(dc, buffer, 8);
+        dc.drawImage(scrollermask, 0, 0);
+        dc.fillStyle = "rgba(0,0,0," + (1-count/threeSecondDelay) + ")";
+        dc.fillRect(0, 0, buffer.width, buffer.height);
+        t.frameBuffer.push(buffer);
+        while (t.frameBuffer.length > 50) {
+            await new Promise(resolve => setTimeout(resolve, 10));
+        }
+    }
+
+    for(var count = 0; count < 2*threeSecondDelay; count++) {
+        let buffer = document.createElement('canvas');
+        buffer.width = width;
+        buffer.height = height;
+        const dc = buffer.getContext('2d');        
+
+        drawNoise(dc, width, height, 40);
+        drawPixelate(dc, buffer, 8);
+    
+        dc.drawImage(scrollermask, 0, 0);
+        t.frameBuffer.push(buffer);
+        while (t.frameBuffer.length > 50) {
+            await new Promise(resolve => setTimeout(resolve, 10));
+        }
+    }
+
+    for(var count = 0; count < threeSecondDelay; count++) {
+        let buffer = document.createElement('canvas');
+        buffer.width = width;
+        buffer.height = height;
+        const dc = buffer.getContext('2d');        
+
+        drawNoise(dc, width, height, 40);
+        drawPixelate(dc, buffer, 8);
+        dc.drawImage(scrollermask, 0, 0);
+        dc.fillStyle = "rgba(0,0,0," + (count/threeSecondDelay) + ")";
+        dc.fillRect(0, 0, buffer.width, buffer.height);
+        t.frameBuffer.push(buffer);
+        while (t.frameBuffer.length > 50) {
+            await new Promise(resolve => setTimeout(resolve, 10));
+        }
+    }
+
+    const creditsStringArray = "Credits:|Created by: Oldhandmixer|Directed by: Dipe@CR!SP|Music by: Salle@CR!SP".split("|");
     scrollerdc.font = "bold 50px Arial";
     scrollerdc.clearRect(0,0,width,height);
     scrollerdc.fillStyle = "rgba(0,0,0,1)";
@@ -1602,7 +1667,7 @@ async function sceneParticelIntro(ctx, t) {
         }
     }
 
-    for(var count = 0; count < 3*threeSecondDelay; count++) {
+    for(var count = 0; count < 2*threeSecondDelay; count++) {
         let buffer = document.createElement('canvas');
         buffer.width = width;
         buffer.height = height;
@@ -1637,9 +1702,6 @@ async function sceneParticelIntro(ctx, t) {
 
 
 }
-
-
-
 
 // ======================================================
 // Main - Program starts here
